@@ -1,0 +1,49 @@
+#include <sys/types.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <string.h>
+
+#define BUFFER_LEN 256
+
+void udpclient_echo(int s, struct sockaddr *to)
+{
+  char buffer[BUFFER_LEN] = "liyangke";
+  struct sockaddr_in from;
+  socklen_t len = sizeof(*to);
+  while(1)
+  {
+      if(sendto(s, buffer,BUFFER_LEN,0,to,len) < 0)
+      {
+          printf("send data fail .\n");
+           return ;
+      }
+     if(recvfrom(s,buffer,BUFFER_LEN,0,(struct sockaddr*)&from, &len) < 0)
+     {
+         printf("receved:%s \n",buffer); 
+ return ;
+     } 
+  }
+  
+}
+
+int main(int argc, char *argv[])
+{
+  int sock_fd;
+  struct sockaddr_in addr_server;
+  sock_fd = socket(AF_INET, SOCK_DGRAM,0);
+  if(sock_fd < 0)
+  {
+      printf("socket error !\n");
+      return  -1;
+  }
+  memset(&addr_server, 0, sizeof(addr_server));
+  addr_server.sin_family = AF_INET;
+  addr_server.sin_port = htons(atoi(argv[2]));
+  inet_pton(AF_INET, argv[1], &addr_server.sin_addr);
+
+  udpclient_echo(sock_fd, (struct sockaddr*)&addr_server);
+  close(sock_fd);
+  return 0;
+}

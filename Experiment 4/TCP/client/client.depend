@@ -1,0 +1,17 @@
+# depslib dependency file v1.0
+1513672419 source:c:\users\y\desktop\client\client.c
+	<winsock2.h>
+	<stdio.h>
+
+1513673733 source:c:\users\y\desktop\client\client.cpp
+	<winsock2.h>
+	<stdio.h>
+
+1513673733 source:c:\users\y\desktop\物联网实验\experiment 3\client\client.cpp
+	<winsock2.h>
+	<stdio.h>
+
+1513673733 source:c:\users\y\desktop\网络程序设计实验\experiment 4\tcp\client\client.cpp
+	<winsock2.h>
+	<stdio.h>
+
